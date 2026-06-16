@@ -1,0 +1,25 @@
+@UnitConversion.Api_HostAddress = http://localhost:5012
+
+### List supported categories
+GET {{UnitConversion.Api_HostAddress}}/api/v1/categories
+Accept: application/json
+
+### List units for a category
+GET {{UnitConversion.Api_HostAddress}}/api/v1/categories/Length/units
+Accept: application/json
+
+### Convert via POST (JSON body)
+POST {{UnitConversion.Api_HostAddress}}/api/v1/conversions
+Content-Type: application/json
+
+{
+  "value": 100,
+  "fromUnit": "km",
+  "toUnit": "mi"
+}
+
+### Convert via GET (query string)
+GET {{UnitConversion.Api_HostAddress}}/api/v1/conversions?value=100&from=C&to=F
+Accept: application/json
+
+###

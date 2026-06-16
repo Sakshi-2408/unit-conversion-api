@@ -1,0 +1,34 @@
+<!--
+  Centralised build settings applied to every project in the solution.
+  Adding a new project picks these up automatically - no per-csproj duplication.
+  See: https://learn.microsoft.com/visualstudio/msbuild/customize-by-directory
+-->
+<Project>
+
+  <PropertyGroup Label="Language and target framework">
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Code quality">
+    <!-- Treat warnings as errors so quality regressions don't sneak in. -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- Enable the latest .NET code analyzers across the board. -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <!-- 1591: missing XML doc; only required where we explicitly opt in per-project. -->
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Build reproducibility and metadata">
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+    <Product>Unit Conversion API</Product>
+    <Authors>Unit Conversion API Contributors</Authors>
+    <Copyright>Copyright (c) $([System.DateTime]::Now.Year)</Copyright>
+    <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+</Project>
